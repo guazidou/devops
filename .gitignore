@@ -15,8 +15,6 @@ target/
 .gradle
 build/
 classes/
-api/build/
-api/tmp/
 out/
 lib/
 node_modules/
