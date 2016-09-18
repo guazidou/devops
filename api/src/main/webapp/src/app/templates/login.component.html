@@ -1,0 +1,42 @@
+<style type="text/css">
+	body {
+		background-color: #74d1ff;
+	}
+	body > .grid {
+		height: 80%;
+	}
+	.image {
+		margin-top: 500px;
+	}
+	.column {
+		max-width: 450px;
+	}
+</style>
+
+<div class="ui middle aligned center aligned grid">
+	<div class="column" style="margin-top: 10%">
+		<h2 class="ui center aligned middle header">
+			<img src="/src/images/chinapex.png" class="ui aligned center large image">
+		</h2>
+		<form class="ui large form">
+			<div class="ui stacked segment">
+				<div class="field">
+					<div class="ui left icon input">
+						<i class="user icon"></i>
+						<input type="text" [(ngModel)]="username" name="username" placeholder="Username">
+					</div>
+				</div>
+				<div class="field">
+					<div class="ui left icon input">
+						<i class="lock icon"></i>
+						<input type="password" [(ngModel)]="password" name="password" placeholder="Password">
+					</div>
+				</div>
+				<button class="ui fluid large teal submit button" (click)="onClickLogIn()">Login</button>
+			</div>
+
+			<div class="ui error message"></div>
+
+		</form>
+	</div>
+</div>

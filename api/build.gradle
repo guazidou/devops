@@ -1,0 +1,54 @@
+version 'unspecified'
+
+apply plugin: 'java'
+apply plugin: 'scala'
+apply plugin: 'war'
+
+//sourceCompatibility = 1.5
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile "org.json4s:json4s-native_2.10:3.2.6"
+    compile "org.scalatra:scalatra_2.10:$scalatraVersion"
+    compile "org.scalatra:scalatra-json_2.10:$scalatraVersion"
+    compile "com.fasterxml.jackson.module:jackson-module-scala_2.10:2.3.0"
+    compile "com.fasterxml.jackson.datatype:jackson-datatype-joda:2.3.0"
+    compile 'org.apache.httpcomponents:httpclient:4.3.3'
+    compile 'commons-net:commons-net:3.3'
+    compile "javax.servlet:javax.servlet-api:3.1.0"
+    compile "org.glassfish.grizzly:grizzly-http-servlet:$grizzlyVersion"
+    compile "org.glassfish.grizzly:grizzly-http-server-multipart:$grizzlyVersion"
+    compile "org.glassfish.grizzly:grizzly-websockets:$grizzlyVersion"
+
+    compile 'mysql:mysql-connector-java:5.1.9'
+    compile "org.scalikejdbc:scalikejdbc_2.10:1.7.5"
+    compile 'commons-codec:commons-codec:1.6'
+    compile 'org.scalikejdbc:scalikejdbc-interpolation_2.10:1.7.5'
+    compile 'com.ning:async-http-client:1.8.7'
+
+    compile 'ch.qos.logback:logback-classic:1.1.2'
+    compile 'org.jvnet.hudson:ganymed-ssh-2:build260'
+
+    compile group: 'org.xerial', name: 'sqlite-jdbc', version: '3.8.11.2'
+
+    testCompile("org.scalatra:scalatra-scalatest_2.10:$scalatraVersion") {
+        exclude module: 'javax.servlet'
+    }
+}
+
+task copyMain << {
+    copy {
+        from 'build/classes/main/com/chinapex/api/Executable.class'
+        into 'src/main/webapp/com/chinapex/api'
+    }
+}
+
+war {
+    metaInf { from 'resources/META-INF'}
+    classpath = jar.outputs.files  + configurations.runtime
+}
+
+war.dependsOn copyMain

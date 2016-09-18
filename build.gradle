@@ -1,0 +1,56 @@
+
+apply plugin: 'java'
+apply plugin: 'scala'
+
+sourceCompatibility = 1.5
+
+repositories {
+    mavenCentral()
+}
+
+ext.scalaVersion = '2.10.3'
+ext.scalatestVersion = '2.0.1-SNAP'
+ext.scalatraVersion = '2.2.2'
+ext.grizzlyVersion = '2.3.7'
+ext.joddVersion = '3.4.8'
+ext.scalaCheckVersion = '1.11.0'
+
+dependencies {
+    compile "org.scala-lang:scala-library:$scalaVersion"
+    testCompile "org.scalatest:scalatest_2.10:$scalatestVersion"
+    testCompile "org.scalacheck:scalacheck_2.10:$scalaCheckVersion"
+}
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+}
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'scala'
+
+    sourceCompatibility = 1.7
+
+    ext.scalaVersion = '2.10.3'
+    ext.scalatestVersion = '2.0.1-SNAP'
+    ext.scalatraVersion = '2.2.2'
+    ext.grizzlyVersion = '2.3.7'
+    ext.joddVersion = '3.4.8'
+    ext.scalaCheckVersion = '1.11.0'
+
+    repositories {
+        // maven{
+        //      url "http://10.62.97.45:8081/nexus/content/groups/public"
+        // }
+        mavenCentral()
+    }
+
+    dependencies {
+        compile "org.scala-lang:scala-library:$scalaVersion"
+        compile "com.typesafe.akka:akka-actor_2.10:2.3.0"
+        testCompile "org.scalatest:scalatest_2.10:$scalatestVersion"
+        testCompile "org.scalacheck:scalacheck_2.10:$scalaCheckVersion"
+    }
+}
